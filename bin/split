@@ -1,10 +1,18 @@
 #!/usr/bin/env elixir
 
+require Logger
+
 defmodule Split do
   def run(args) do
     args
     |> parse_args()
+    |> log_args()
     |> split()
+  end
+
+  defp log_args({input, output}) do
+    Logger.info("input => #{input}")
+    Logger.info("output => #{output}")
   end
 
   defp parse_args([input_path | [output_path | _]]), do: {input_path, output_path}
