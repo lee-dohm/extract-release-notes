@@ -13,7 +13,7 @@ output_path="$GITHUB_WORKSPACE/$RELEASE_NOTES_PATH"
 jq .pull_request.body "$GITHUB_EVENT_PATH" > "$temp_path"
 
 echo "----- Pull Request body -----"
-echo $(cat "$temp_path")
+cat $temp_path
 echo "-----------------------------"
 
 /split "$temp_path" "$output_path"
