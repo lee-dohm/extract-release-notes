@@ -10,7 +10,7 @@ fi
 temp_path="$HOME/pull-request-body.md"
 output_path="$GITHUB_WORKSPACE/$RELEASE_NOTES_PATH"
 
-jq .pull_request.body "$GITHUB_EVENT_PATH" > "$temp_path"
+jq --raw-output .pull_request.body "$GITHUB_EVENT_PATH" > "$temp_path"
 
 echo "----- Pull Request body -----"
 cat $temp_path
