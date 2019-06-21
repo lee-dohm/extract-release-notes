@@ -20,7 +20,6 @@ action "On merged pull requests" {
 action "Extract release notes" {
   needs = ["On merged pull requests"]
   uses = "lee-dohm/extract-release-notes@master"
-  secrets = ["GITHUB_TOKEN"]
 }
 
 action "Post release notes" {
