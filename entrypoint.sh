@@ -3,7 +3,7 @@
 # Exit on failure
 set -e
 
-if [ -n "$RELEASE_NOTES_PATH" ]; then
+if [ -z "$RELEASE_NOTES_PATH" ]; then
   RELEASE_NOTES_PATH="__RELEASE_NOTES.md"
 fi
 

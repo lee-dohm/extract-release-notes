@@ -10,9 +10,11 @@ defmodule Split do
     |> split()
   end
 
-  defp log_args({input, output}) do
+  defp log_args(args = {input, output}) do
     Logger.info("input => #{input}")
     Logger.info("output => #{output}")
+
+    args
   end
 
   defp parse_args([input_path | [output_path | _]]), do: {input_path, output_path}
