@@ -7,11 +7,15 @@ if [ -n "$RELEASE_NOTES_PATH" ]; then
   RELEASE_NOTES_PATH="__RELEASE_NOTES.md"
 fi
 
-jq .pull_request.body "$GITHUB_EVENT_PATH" > "$HOME/pull-request-body.md"
+temp_path="$HOME/pull-request-body.md"
+output_path="$GITHUB_WORKSPACE/$RELEASE_NOTES_PATH"
 
-/split "$HOME/pull-request-body.md" "$GITHUB_WORKSPACE/$RELEASE_NOTES_PATH"
+jq .pull_request.body "$GITHUB_EVENT_PATH" > "$temp_path"
 
-if [ -z "$(cat $GITHUB_WORKSPACE/$RELEASE_NOTES_PATH)" ]; then
+/split "$temp_path" "$output_path"
+
+output=$(cat "$output_path")
+if [ -z "$output" ]; then
   echo "Error: No release notes found"
   exit 1
 fi
