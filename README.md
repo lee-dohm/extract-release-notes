@@ -32,7 +32,7 @@ action "Post release notes" {
 
 | Key | Description | Type | Required |
 |-----|-------------|------|----------|
-| `RELEASE_NOTES_PATH` | Path relative to `GITHUB_WORKSPACE` to store the release notes in. _(Defaults to `$GITHUB_WORKSPACE/__RELEASE_NOTES.md`)_ | `env` | No |
+| `RELEASE_NOTES_PATH` | Path relative to `GITHUB_WORKSPACE` to store the release notes in. _(Defaults to `__RELEASE_NOTES.md`)_ | `env` | No |
 
 ## License
 
