@@ -15,6 +15,11 @@ jq .pull_request.body "$GITHUB_EVENT_PATH" > "$temp_path"
 /split "$temp_path" "$output_path"
 
 output=$(cat "$output_path")
+
+echo "----- Release notes -----"
+echo $output
+echo "-------------------------"
+
 if [ -z "$output" ]; then
   echo "Error: No release notes found"
   exit 1
