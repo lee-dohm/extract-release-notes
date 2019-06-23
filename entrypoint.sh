@@ -18,10 +18,10 @@ echo "-----------------------------"
 
 /split "$temp_path" "$output_path"
 
-output=$(cat "$output_path")
+output=`cat "$output_path"`
 
 echo "----- Release notes -----"
-echo $output
+echo "$output"
 echo "-------------------------"
 
 if [ -z "$output" ]; then
