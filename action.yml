@@ -1,5 +1,4 @@
 name: Extract release notes
-author: lee-dohm
 description: Extracts release notes from pull requests
 inputs:
   releaseNotesPath:
