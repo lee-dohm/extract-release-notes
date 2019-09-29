@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Extract release notes
-      uses: lee-dohm/extract-release-notes@v1.0.1
+      uses: lee-dohm/extract-release-notes@v1.0.2
 ```
 
 ## Configuration
