@@ -4,7 +4,6 @@ inputs:
   releaseNotesPath:
     description: Path where release notes will be stored
     required: false
-    default: '$GITHUB_WORKSPACE/__RELEASE_NOTES.md'
 outputs:
   releaseNotesPath:
     description: Path where release notes were stored, if successful
