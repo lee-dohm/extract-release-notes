@@ -4,35 +4,25 @@ A GitHub Action that extracts release notes from pull requests.
 
 ## Use
 
-Publish release notes on merged pull requests:
+Validate that a pull request contains a release notes section:
 
 ```
-workflow "Publish release notes" {
-  on = "pull_request"
-  resolves = ["Post release notes"]
-}
-
-action "On merged pull requests" {
-  uses = "actions/bin/filter@master"
-  args = "merged true"
-}
-
-action "Extract release notes" {
-  needs = ["On merged pull requests"]
-  uses = "lee-dohm/extract-release-notes@master"
-}
-
-action "Post release notes" {
-  needs = ["Extract release notes"]
-  uses = "some-user/some-repo@master"
-}
+on: pull_request
+name: Validate release notes
+jobs:
+  validateReleaseNotes:
+    name: Validate release notes
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract release notes
+      uses: lee-dohm/extract-release-notes@v1.0.0
 ```
 
 ## Configuration
 
 | Key | Description | Type | Required |
 |-----|-------------|------|----------|
-| `RELEASE_NOTES_PATH` | Path relative to `GITHUB_WORKSPACE` to store the release notes in. _(Defaults to `__RELEASE_NOTES.md`)_ | `env` | No |
+| `releaseNotesPath` | Path to store the release notes in. _(Defaults to `$GITHUB_WORKSPACE/__RELEASE_NOTES.md`)_ | `input` and `output` | No |
 
 ## License
 

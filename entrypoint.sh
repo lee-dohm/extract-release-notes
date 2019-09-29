@@ -3,28 +3,31 @@
 # Exit on failure
 set -e
 
-if [ -z "$RELEASE_NOTES_PATH" ]; then
-  RELEASE_NOTES_PATH="__RELEASE_NOTES.md"
+if [ -z "$INPUT_RELEASENOTESPATH" ]; then
+  INPUT_RELEASENOTESPATH="$GITHUB_WORKSPACE/__RELEASE_NOTES.md"
 fi
 
 temp_path="$HOME/pull-request-body.md"
-output_path="$GITHUB_WORKSPACE/$RELEASE_NOTES_PATH"
+output_path="$INPUT_RELEASENOTESPATH"
 
 jq --raw-output .pull_request.body "$GITHUB_EVENT_PATH" > "$temp_path"
 
-echo "----- Pull Request body -----"
-cat $temp_path
-echo "-----------------------------"
+body=`cat $temp_path`
+echo "##[info]----- Pull Request body -----"
+echo "##[info]$body"
+echo "##[info]-----------------------------"
 
 /split "$temp_path" "$output_path"
 
 output=`cat "$output_path"`
 
-echo "----- Release notes -----"
-echo "$output"
-echo "-------------------------"
+echo "##[info]----- Release notes -----"
+echo "##[info]$output"
+echo "##[info]-------------------------"
 
 if [ -z "$output" ]; then
-  echo "Error: No release notes found"
+  echo "##[error]No release notes found"
   exit 1
+else
+  echo "##[set-output name=releaseNotesPath]$output_path"
 fi
