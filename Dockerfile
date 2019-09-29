@@ -7,7 +7,7 @@ LABEL "com.github.actions.color"="blue"
 
 LABEL "repository"="https://github.com/lee-dohm/extract-release-notes"
 LABEL "homepage"="https://github.com/lee-dohm/extract-release-notes"
-LABEL "maintainer"="Lee Dohm <lee-dohm@github.com>"
+LABEL "maintainer"="Lee Dohm"
 
 RUN set -e \
     && apk update \
