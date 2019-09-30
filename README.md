@@ -44,6 +44,14 @@ jobs:
 |-----|-------------|------|----------|
 | `releaseNotesPath` | Path to store the release notes in. _(Defaults to `$GITHUB_WORKSPACE/__RELEASE_NOTES.md`)_ | `input` and `output` | No |
 
+## Versioning
+
+This project uses Docker-style version tags to allow you to control which versions of the Action you use in your project. Since GitHub Actions use git references rather than semver masks, depending on how tight or loose you want to specify the acceptable version, you can use the following:
+
+* `lee-dohm/extract-release-notes@v1.0.1` will use `v1.0.1` and will never update without you changing this value
+* `lee-dohm/extract-release-notes@v1.0` will use the latest version of the Action that starts with `v1.0` and will update automatically if the patch version changes
+* `lee-dohm/extract-release-notes@v1` will use the latest version of the Action that starts with `v1` and will update automatically if the minor or patch version changes
+
 ## License
 
 [MIT](LICENSE.md)
