@@ -1,101 +1,49 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Extract Release Notes Action
 
-# Create a JavaScript Action using TypeScript
+A GitHub Action that extracts release notes from pull requests.
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+## Format
 
-This template includes compilication support, tests, a validation workflow, publishing, and versioning guidance.  
+Release notes are extracted from the body of the pull request. It looks for content starting after a [Markdown header](https://spec.commonmark.org/0.29/#atx-headings) of `Release notes`, case insensitive and the trailing `s` is optional. Everything after that header is considered to be release notes content.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+> **Please note:** The space after the one to six `#` characters _is required._
 
-## Create an action from this template
+Example:
 
-Click the `Use this Template` and provide the new repo details for your action
+```markdown
+This is the body of a pull request. Describe everything necessary to do with the PR here.
 
-## Code in Master
+## Release notes
 
-Install the dependencies  
-```bash
-$ npm install
+- Fixed the thingamabob
+- Tweaked the whoosywhatsis
+- Added a foozle
 ```
 
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run pack
+If no release notes section is found, the Action returns a failure exit code.
+
+## Use
+
+Validate that a pull request contains a release notes section:
+
+```
+on: pull_request
+name: Validate release notes
+jobs:
+  validateReleaseNotes:
+    name: Validate release notes
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract release notes
+      uses: lee-dohm/extract-release-notes@v1.0.3
 ```
 
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
+## Configuration
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
+| Key                | Description                                                                                | Type                 | Required |
+| ------------------ | ------------------------------------------------------------------------------------------ | -------------------- | -------- |
+| `releaseNotesPath` | Path to store the release notes in. _(Defaults to `$GITHUB_WORKSPACE/__RELEASE_NOTES.md`)_ | `input` and `output` | No       |
 
-...
-```
+## License
 
-## Change action.yml
-
-The action.yml contains defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run pack
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml)])
-
-```yaml
-uses: ./
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
-
-## Usage:
-
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
+[MIT](LICENSE.md)

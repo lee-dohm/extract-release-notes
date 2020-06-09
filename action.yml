@@ -1,10 +1,12 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: extract-release-notes
+description: Extracts release notes from pull requests
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  releaseNotesPath:
+    description: Path to store the release notes in
+    default: $GITHUB_WORKSPACE/__RELEASE_NOTES.md
+outputs:
+  releaseNotesPath:
+    description: Path the release notes were stored in
 runs:
   using: 'node12'
   main: 'dist/index.js'
