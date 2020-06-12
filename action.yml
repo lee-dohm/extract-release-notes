@@ -1,15 +1,14 @@
-name: Extract release notes
+name: extract-release-notes
 description: Extracts release notes from pull requests
 inputs:
+  fromFile:
+    description: Read the pull request body from this file instead of the event JSON
   releaseNotesPath:
-    description: Path where release notes will be stored
-    required: false
+    description: Path to store the release notes in
+    default: ${{ github.workspace }}/__RELEASE_NOTES.md
 outputs:
   releaseNotesPath:
-    description: Path where release notes were stored, if successful
+    description: Path the release notes were stored in
 runs:
-  using: docker
-  image: Dockerfile
-branding:
-  icon: download
-  color: blue
+  using: 'node12'
+  main: 'dist/index.js'
