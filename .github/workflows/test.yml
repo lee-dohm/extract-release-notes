@@ -1,0 +1,28 @@
+name: Test
+on:
+  pull_request:
+  push:
+    branches:
+      - primary
+
+jobs:
+  unitTest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: npm ci
+      - run: npm run ci
+  integrationTest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: npm ci
+      - run: npm run build
+      - uses: ./
+        id: result
+        with:
+          fromFile: ${{ github.workspace }}/test/fixtures/test-release-notes.md
+
+      - run: diff "${{ github.workspace }}/test/fixtures/result-release-notes.md" "${{ github.workspace }}/__RELEASE_NOTES.md"
