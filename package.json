@@ -24,16 +24,16 @@
   "author": "@lee-dohm",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.23",
-    "@types/node": "^12.7.12",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.47",
     "@zeit/ncc": "^0.20.5",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
     "prettier": "^1.19.1",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.9.5"
   }
 }
