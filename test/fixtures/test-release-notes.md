@@ -1,4 +1,4 @@
-Test
+Used in the integration test workflow
 
 ## Release notes
 
