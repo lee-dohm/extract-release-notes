@@ -1,6 +1,8 @@
 name: extract-release-notes
 description: Extracts release notes from pull requests
 inputs:
+  fromFile:
+    description: Read the pull request body from this file instead of the event JSON
   releaseNotesPath:
     description: Path to store the release notes in
     default: $GITHUB_WORKSPACE/__RELEASE_NOTES.md
