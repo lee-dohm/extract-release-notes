@@ -26,23 +26,29 @@ If no release notes section is found, the Action returns a failure exit code.
 
 Validate that a pull request contains a release notes section:
 
-```
-on: pull_request
+```yaml
 name: Validate release notes
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronized, edited]
+
 jobs:
   validateReleaseNotes:
     name: Validate release notes
     runs-on: ubuntu-latest
     steps:
-    - name: Extract release notes
-      uses: lee-dohm/extract-release-notes@v1.0.3
+      - name: Extract release notes
+        uses: lee-dohm/extract-release-notes@v2
 ```
 
-## Configuration
+### Inputs
 
-| Key                | Description                                                                                | Type                 | Required |
-| ------------------ | ------------------------------------------------------------------------------------------ | -------------------- | -------- |
-| `releaseNotesPath` | Path to store the release notes in. _(Defaults to `$GITHUB_WORKSPACE/__RELEASE_NOTES.md`)_ | `input` and `output` | No       |
+- `releaseNotesPath` &mdash; Path to the file where you want the release notes stored when found (_default:_ `$GITHUB_WORKSPACE/__RELEASE_NOTES.md`)
+
+### Outputs
+
+- `releaseNotesPath &mdash; Path where the release notes were stored if they were found
 
 ## License
 
