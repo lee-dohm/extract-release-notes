@@ -48,7 +48,7 @@ jobs:
 
 ### Outputs
 
-- `releaseNotesPath &mdash; Path where the release notes were stored if they were found
+- `releaseNotesPath` &mdash; Path where the release notes were stored if they were found
 
 ## License
 
