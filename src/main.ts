@@ -27,7 +27,9 @@ async function run(): Promise<void> {
       body = event.pull_request.body
     }
 
-    const releaseNotes = parseBody(body).trim().concat('\n')
+    const releaseNotes = parseBody(body)
+      .trim()
+      .concat('\n')
 
     await writeFile(releaseNotesPath, releaseNotes)
 

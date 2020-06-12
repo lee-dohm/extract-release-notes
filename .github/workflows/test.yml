@@ -23,6 +23,6 @@ jobs:
       - uses: ./
         id: result
         with:
-          fromFile: "$GITHUB_WORKSPACE/test/fixtures/test-release-notes.md"
+          fromFile: ${{ github.workspace }}/test/fixtures/test-release-notes.md
 
-      - run: diff "$GITHUB_WORKSPACE/test/fixtures/result-release-notes.md" "$GITHUB_WORKSPACE/__RELEASE_NOTES.md"
+      - run: diff "${{ github.workspace }}/test/fixtures/result-release-notes.md" "${{ github.workspace }}/__RELEASE_NOTES.md"
