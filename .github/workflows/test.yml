@@ -1,23 +1,26 @@
-name: 'build-test'
-on: # rebuild any PRs and main branch changes
+name: Test
+on:
   pull_request:
   push:
     branches:
-      - master
-      - 'releases/*'
+      - primary
 
 jobs:
-  build: # make sure build/ci work properly
+  unitTest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: |
-          npm install
-          npm run all
-  test: # make sure the action works on a clean machine without building
+      - uses: actions/checkout@v2
+
+      - run: npm ci
+      - run: npm run ci
+  integrationTest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
       - uses: ./
+        id: result
         with:
-          milliseconds: 1000
+          fromFile: "$GITHUB_WORKSPACE/test/fixtures/test-release-notes.md"
+
+      - run: diff "$GITHUB_WORKSPACE/test/fixtures/result-release-notes.md" "$GITHUB_WORKSPACE/__RELEASE_NOTES.md"
