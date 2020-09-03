@@ -6,9 +6,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npx ncc build ./src/main.ts",
-    "ci": "npm run lint && npm test",
+    "ci": "npm run format-check && npm test",
     "format": "prettier --write **/*.ts **/*.md **/*.yaml **/*.yml",
-    "lint": "prettier --check **/*.ts **/*.md **/*.yaml **/*.yml",
+    "format-check": "prettier --check **/*.ts **/*.md **/*.yaml **/*.yml",
     "start": "npx ncc run ./src/main.ts",
     "test": "jest"
   },
@@ -32,7 +32,7 @@
     "@zeit/ncc": "^0.22.3",
     "jest": "^24.9.0",
     "jest-circus": "^26.4.2",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.1",
     "ts-jest": "^24.3.0",
     "typescript": "^4.0.2"
   }
